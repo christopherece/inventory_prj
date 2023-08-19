@@ -1,76 +1,90 @@
 {% load static %}
 
 <!DOCTYPE html>
+<!--
+This is a starter template page. Use this page to start your new project from
+scratch. This page gets rid of all links and provides the needed markup only.
+-->
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resume</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Inventory System | ICT Gear</title>
 
-
-    <style>
-        body {
-            /* {% comment %} background-color: #333333;
-            text-color: #FFFFF0; {% endcomment %} */
-        }
-        main {
-            padding-left: 250px;
-        }
-
-        @media only screen and (max-width: 992px) {
-            main {
-                padding-left: 0;
-            }
-        }
-       
-        .show-on-small-and-medium {
-            display: none; /* Hide the elements by default */
-          }
-        
-          @media (max-width: 991px) {
-            /* Show the elements on small and medium devices with a maximum width of 991 pixels */
-            .show-on-small-and-medium {
-              display: block;
-            }
-          }
-          
-        
-    </style>
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="{% static 'css/all.min.css' %}" type="text/css" media="screen,projection" />
+  <!-- Theme style -->
+  <link rel="stylesheet" href="{% static 'css/adminlte.min.css' %}" type="text/css" media="screen,projection" />
 </head>
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
 
-<body>
-    
-    {% include 'partials/_navbar.html' %}
-    <main>
-        {% block content %}
+  <!-- Navbar -->
+  {% include 'partials/_navbar.html' %}
 
-        {% endblock %}
-    </main>
+  <!-- /.navbar -->
 
-    {% include 'partials/_footer.html' %}
-    
+  <!-- Main Sidebar Container -->
+  {% include 'partials/_sidebar.html' %}
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var elems = document.querySelectorAll('.collapsible');
-            var instances = M.Collapsible.init(elems);
-          });
-    </script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var elems = document.querySelectorAll('.sidenav');
-            var instances = M.Sidenav.init(elems);
 
-        });
-    </script>
 
-    
+  <!-- Content Wrapper. Contains page content -->
+  {% block content %}
+
+  {% endblock %}
+
+  <!-- Main Footer -->
+  {% include 'partials/_footer.html' %}
+
+</div>
+<!-- ./wrapper -->
+
+<!-- REQUIRED SCRIPTS -->
+
+<!-- jQuery -->
+
+<script src="{% static 'js/jquery.min.js' %} "></script>
+
+<!-- Bootstrap 4 -->
+<script src="{% static 'js/bootstrap.bundle.min.js' %} "></script>
+
+<!-- DataTables  & Plugins -->
+<script src="{% static 'js/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'js/dataTables.bootstrap4.min.js' %} "></script>
+<script src="{% static 'js/dataTables.responsive.min.js' %} "></script>
+<script src="{% static 'js/responsive.bootstrap4.min.js' %} "></script>
+<script src="{% static 'js/dataTables.buttons.min.js' %} "></script>
+<script src="{% static 'js/buttons.bootstrap4.min.js' %} "></script>
+<script src="{% static 'js/jszip.min.js' %} "></script>
+<script src="{% static 'js/pdfmake.min.js' %} "></script>
+<script src="{% static 'js/vfs_fonts.js' %} "></script>
+<script src="{% static 'js/buttons.html5.min.js' %} "></script>
+<script src="{% static 'js/buttons.print.min.js' %} "></script>
+<script src="{% static 'js/buttons.colVis.min.js' %} "></script>
+
+<!-- AdminLTE App -->
+<script src="{% static 'js/adminlte.min.js' %} "></script>
+
+<script>
+    $(function () {
+      $("#example1").DataTable({
+        "responsive": true, "lengthChange": false, "autoWidth": false,
+        "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+      }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+      $('#example2').DataTable({
+        "paging": true,
+        "lengthChange": false,
+        "searching": false,
+        "ordering": true,
+        "info": true,
+        "autoWidth": false,
+        "responsive": true,
+      });
+    });
+  </script>
+
 </body>
-
 </html>
