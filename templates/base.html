@@ -1,0 +1,76 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}" />
+
+
+    <style>
+        body {
+            /* {% comment %} background-color: #333333;
+            text-color: #FFFFF0; {% endcomment %} */
+        }
+        main {
+            padding-left: 250px;
+        }
+
+        @media only screen and (max-width: 992px) {
+            main {
+                padding-left: 0;
+            }
+        }
+       
+        .show-on-small-and-medium {
+            display: none; /* Hide the elements by default */
+          }
+        
+          @media (max-width: 991px) {
+            /* Show the elements on small and medium devices with a maximum width of 991 pixels */
+            .show-on-small-and-medium {
+              display: block;
+            }
+          }
+          
+        
+    </style>
+</head>
+
+<body>
+    
+    {% include 'partials/_navbar.html' %}
+    <main>
+        {% block content %}
+
+        {% endblock %}
+    </main>
+
+    {% include 'partials/_footer.html' %}
+    
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var elems = document.querySelectorAll('.collapsible');
+            var instances = M.Collapsible.init(elems);
+          });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var elems = document.querySelectorAll('.sidenav');
+            var instances = M.Sidenav.init(elems);
+
+        });
+    </script>
+
+    
+</body>
+
+</html>
