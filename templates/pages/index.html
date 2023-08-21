@@ -144,15 +144,16 @@
           </button>
         </div>
         <div class="modal-body">
-          <form>
+          <form id="itemform" method="post" action="">
+            {% csrf_token %}
             <div class="card-body">
               <div class="form-group">
                 <label for="serial_no">Serial Number</label>
-                <input type="text" class="form-control" name="serial_no" id="serial_no">
+                <input type="text" class="form-control" name="serial_no" id="serial_no" disabled>
               </div>
               <div class="form-group">
                 <label for="display_name">Display Name</label>
-                <input type="text" class="form-control" name="display_name" id="display_name">
+                <input type="text" class="form-control" name="display_name" id="display_name" disabled>
               </div>
   
               <div class="form-group">
@@ -169,12 +170,13 @@
             <!-- <div class="card-footer">
               <button type="submit" class="btn btn-primary">Submit</button>
             </div> -->
-          </form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+          <button type="submit" class="btn btn-primary">Save changes</button>
         </div>
+      </form>
+
       </div>
     </div>
   </div>

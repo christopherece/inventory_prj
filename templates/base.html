@@ -106,8 +106,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
       var stock_room = $(this).data('stock_room');
 
       // Set the data in the modal fields
+      $('#item_id').val(id);
       $('#serial_no').val(serial_no);
       $('#display_name').val(display_name);
+
+      $('#editItemForm').attr('action', '{% url "edit_item" 0 %}'.replace('0', id));
+
 
       $.ajax({
       type: 'GET',
@@ -130,6 +134,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
             text: 'No stock rooms available'
           }));
         }
+        stockRoomSelect.append($('<option>', {
+            value: 'Albany',
+            text: 'Albany'
+          }));
         
         $('#hardwareModal').modal('show');
       },

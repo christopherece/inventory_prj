@@ -1,6 +1,7 @@
 from django.http import JsonResponse
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import Category, Items
+from .forms import ItemForm
 
 # Create your views here.
 def index(request):
@@ -20,3 +21,22 @@ def get_item_data(request):
             return JsonResponse(stock_rooms_list, safe=False)
         except Exception as e:
             return JsonResponse({'error': str(e)}, status=500)
+        
+def edit_item(request, id):
+    items = get_object_or_404(Items, pk=id)
+    if request.method == 'POST':
+        form = ItemForm(request.POST, instance=items)
+        if form.is_valid():
+            form.save()
+            context = {
+                 'success': True,
+                 'success_message': 'Feedback saved successfully!',
+                 'success_image': '/static/img/thumbsup.gif',
+                 'success_class': 'alert alert-success',
+                 
+             }
+            return redirect('index')
+    else:
+        form = ItemForm(instance=items)
+    context = {'form':form}
+    return render(request, 'pages/index.html', context)

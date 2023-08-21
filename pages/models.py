@@ -18,6 +18,7 @@ class Items(models.Model):
         ('Henderson', 'Henderson'),
         ('Manukau', 'Manukau'),
         ('Takapuna/EkePanuku', 'Takapun/EkePanuku'),
+        ('TAU', 'TAU'),
         
     )
 
@@ -33,4 +34,10 @@ class Items(models.Model):
 
     def __str__(self):
         return self.display_name
+    
+class Location(models.Model):
+    name = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.name
 
