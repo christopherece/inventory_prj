@@ -131,10 +131,12 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-#Messages
+#Messagse
 from django.contrib.messages import constants as messages
 MESSAGE_TAGS = {
+    messages.SUCCESS: 'success',
     messages.ERROR: 'danger'
+
 }
 
 # Media Folder Settings
