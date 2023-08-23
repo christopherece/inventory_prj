@@ -1,0 +1,7 @@
+/* Add a class to align the search input to the right */
+.search-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-left: auto;
+  }

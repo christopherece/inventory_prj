@@ -17,6 +17,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="{% static 'css/all.min.css' %}" type="text/css" media="screen,projection" />
   <!-- Theme style -->
   <link rel="stylesheet" href="{% static 'css/adminlte.min.css' %}" type="text/css" media="screen,projection" />
+  <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css" media="screen,projection" />
+
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -33,6 +35,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
   <!-- Content Wrapper. Contains page content -->
   {% block content %}
+
+  {% include 'partials/_modals.html' %}
+
 
   {% endblock %}
 
@@ -68,23 +73,35 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <!-- AdminLTE App -->
 <script src="{% static 'js/adminlte.min.js' %} "></script>
 
-<script>
-    $(function () {
+<script src="{% static 'js/main.js' %}"></script>
 
-      $("#example1").DataTable({
-        "responsive": true, "lengthChange": false, "autoWidth": false,
-        "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
-        "columnDefs": [
-          {
-            "targets": "_all",
-            "render": function (data, type, row, meta) {
-              return '<a href="' + data + '">' + data + '</a>';
-            }
-          }
-        ]
-      }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-      
-      $('#example2').DataTable({
+<script>
+  $(function () {
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+      "responsive": true,
+      "pageLength":20,
+    });
+
+  // $("#example").DataTable({
+  //   "responsive": true, "lengthChange": false, "autoWidth": false,
+  //   "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
+  //   "columnDefs": [
+  //     {
+  //       "targets": "_all",
+  //       "render": function (data, type, row, meta) {
+  //         return '<a href="' + data + '">' + data + '</a>';
+  //       }
+  //     }
+  //   ]
+  // }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+  
+      $('#example1').DataTable({
         "paging": true,
         "lengthChange": false,
         "searching": false,
@@ -94,11 +111,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
         "responsive": true,
         "pageLength":20,
       });
-    });
+
+ 
+});
 </script>
 
 <script>
   $(document).ready(function() {
+    
     $('#example2').on("click",".modalHardware",function() {
       var id = $(this).data('id');
       var serial_no = $(this).data('serial_no');
@@ -139,49 +159,32 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   console.log('Error fetching locations.');
               }
           });
-
-
-    //   $.ajax({
-    //   type: 'GET',
-    //   url: '/get_item_data/',  // Replace with the actual URL to query stock rooms
-    //   data: { id: id },
-    //   success: function(data) {
-    //     var stockRoomSelect = $('.stock_room');
-    //     stockRoomSelect.empty();
-        
-    //     if (data.length > 0) {
-    //       for (var i = 0; i < data.length; i++) {
-    //         stockRoomSelect.append($('<option>', {
-    //           value: data[i],
-    //           text: data[i]
-    //         }));
-    //       }
-    //     } else {
-    //       stockRoomSelect.append($('<option>', {
-    //         value: '',
-    //         text: 'No stock rooms available'
-    //       }));
-    //     }
-        
-    //     $('#hardwareModal').modal('show');
-    //   },
-    //   error: function() {
-    //     console.log('Error fetching stock rooms.');
-    //   }
-    // });
-
     });
+  });
+
+
+</script>
+
+<script>
+  const searchInput = document.getElementById('searchInput');
+  const dataTable = document.getElementById('example2').getElementsByTagName('tbody')[0];
+
+  searchInput.addEventListener('input', function() {
+      const searchTerm = searchInput.value.toLowerCase();
+      const rows = dataTable.getElementsByTagName('tr');
+      
+      for (let row of rows) {
+          const rowData = row.textContent.toLowerCase();
+          if (rowData.includes(searchTerm)) {
+              row.style.display = '';
+          } else {
+              row.style.display = 'none';
+          }
+      }
   });
 </script>
 
 
-
-
-  
-  
-
-
-  
 
 </body>
 </html>
