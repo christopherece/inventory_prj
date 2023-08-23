@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'pages.apps.PagesConfig',
+    'queues.apps.QueuesConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -75,12 +76,33 @@ WSGI_APPLICATION = 'inventory.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'tbl_inventory',
+        'USER': 'postgres',
+        'PASSWORD': '!pass1234',
+        'HOST':'192.168.10.225'
+    },
+    'dockinn_db': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'dockinndb',
+        'USER': 'postgres',
+        'PASSWORD': '!pass1234',
+        'HOST':'192.168.10.225'
+    },
+    
 }
+
+# DATABASE_ROUTERS = ['inventory.queues.routers.SecondDBRouter']
+
 
 
 # Password validation
