@@ -139,6 +139,36 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
       $('#notes').val(notes);
 
+
+
+      $.ajax({
+              type: 'GET',
+              url: '/get_all_users/',  // Use the correct URL for fetching all locations
+              success: function(data) {
+                console.log(data)
+                  var userSelect = $('.allocated_to');
+                  userSelect.empty();
+                  
+                  if (data.length > 0) {
+                      for (var i = 0; i < data.length; i++) {
+                              userSelect.append($('<option>', {
+                              value: data[i],
+                              text: data[i]
+                          }));
+                      }
+                  } else {
+                      userSelect.append($('<option>', {
+                          value: '',
+                          text: 'No stock rooms available'
+                      }));
+                  }
+                  
+              },
+              error: function() {
+                  console.log('Error fetching locations.');
+              }
+          });
+
         
         $.ajax({
               type: 'GET',
@@ -161,12 +191,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       }));
                   }
                   
-                  $('#hardwareModal').modal('show');
               },
               error: function() {
                   console.log('Error fetching locations.');
               }
           });
+          $('#hardwareModal').modal('show');
+
     });
   });
 
