@@ -76,6 +76,9 @@
                           data-display_name="{{ item.display_name }}" 
                           data-stock_room="{{ item.stock_room }}" 
                           data-cost="{{ item.cost }}"
+                          data-allocated_to="{{item.allocated_to}}"
+                          data-notes="{{item.notes}}"
+
                           id="openHardwareModal"
                       >
                         {{item.serial_no}}
@@ -142,7 +145,9 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="hardwareModalLabel"></h5>
+          <h5 class="modal-title" id="hardwareModalLabel">
+
+          </h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -152,8 +157,8 @@
             {% csrf_token %}
             <div class="card-body">
               <div class="form-group">
-                <label for="serial_no">Serial Number</label>
-                <input type="text" class="form-control" name="serial_no" id="serial_no" disabled>
+                <label for="allocated_to">Allocated To</label>
+                <input type="text" class="form-control" name="allocated_to" id="allocated_to" disabled>
               </div>
               <div class="form-group">
                 <label for="display_name">Display Name</label>
@@ -165,6 +170,12 @@
                 <select class="form-control stock_room" name="stock_room">
                   <!-- Options will be populated dynamically -->
                 </select>
+              </div>
+
+              <!-- Add Notes -->
+              <div class="form-group">
+                <label for="notes">Notes</label>
+                <textarea class="form-control" name="notes" id="notes"></textarea>
               </div>
               
               
