@@ -35,6 +35,6 @@ class ItemsAdmin(admin.ModelAdmin):
 
         
     )
-    list_display_links = ('id', 'serial_no')
+    list_display_links = ('id', 'serial_no','allocated_to')
 
 admin.site.register(Items, ItemsAdmin)

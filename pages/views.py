@@ -12,10 +12,10 @@ from django.contrib.auth.models import User
 def index(request):
     
     items = Items.objects.all()
-
     context = {
         'items':items
     }
+    print(items)
     return render(request, 'pages/index.html', context)
 
 def get_item_data(request):

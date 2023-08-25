@@ -1,0 +1,161 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="content-wrapper" style="min-height: 1311px;">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <!-- <h1>ICT Inventory</h1> -->
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">HArdware</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">ICT Request/Incident List</h3>
+              </div>
+              <!-- /.card-header -->
+              <section id="actions" class="py-4 mb-4 bg-light">
+                <div class="container">
+                  <div class="row">
+                    <div class="col-md-3">
+                        <div class="card text-center bg-primary text-white mb-3">
+                            <div class="card-body">
+                              <h3>Hardware</h3>
+                              <h4 class="display-6">
+                                <i class="fas fa-pencil-alt"></i> {{hardwareCount}}
+                              </h4>
+                              <a href="" class="btn btn-outline-light btn-sm">View</a>
+                            </div>
+                        </div>
+                    </div>
+            
+                    <div class="col-md-3">
+                        <div class="card text-center bg-success text-white mb-3">
+                            <div class="card-body">
+                              <h3>Software</h3>
+                              <h4 class="display-6">
+                                <i class="fas fa-folder"></i> {{softwareCount}}
+                              </h4>
+                              <a href="" class="btn btn-outline-light btn-sm">View</a>
+                            </div>
+                          </div>            
+                    </div>
+            
+                    <div class="col-md-3">
+                        <div class="card text-center bg-warning text-white mb-3">
+                            <div class="card-body">
+                              <h3>Phone</h3>
+                              <h4 class="display-6">
+                                <i class="fas fa-users"></i> {{phoneCount}}
+                              </h4>
+                              <a href="" class="btn btn-outline-light btn-sm">View</a>
+                            </div>
+                          </div>            
+                    </div>
+            
+                    <div class="col-md-3">
+                        <div class="card text-center bg-warning text-white mb-3">
+                            <div class="card-body">
+                              <h3>Account</h3>
+                              <h4 class="display-6">
+                                <i class="fas fa-users"></i> {{accountCount}}
+                              </h4>
+                              <a href="" class="btn btn-outline-light btn-sm">View</a>
+                            </div>
+                          </div>            
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+            <section id="posts">
+                <div class="container">
+                    <form name="updateTicket" action="{% url 'updatequeue' myqueue.id %}" method="POST">
+                    {% csrf_token %}
+                    <div class="row">
+                    <div class="col-12">	
+                        <div class="row">
+
+                        <div class="col-md-6" >		
+                            <div class="form-group">
+                            <h5>Description <span class="text-danger">*</span></h5>
+                            <div class="controls">
+                                <input type="text" name="description" class="form-control" value="{{ myqueue.description }}" disabled>  
+                            </div>	 
+                            </div>
+                        </div><!-- End Col Md-6 -->
+
+                        <div class="col-md-6" >		
+                            <div class="form-group">
+                            <h5>RITM <span class="text-danger"></span></h5>
+                            <div class="controls">
+                                <input type="text" name="ritm" class="form-control" value="{{ myqueue.ritm }}" disabled>  
+                            </div>	 
+                            </div>
+                        </div><!-- End Col Md-6 -->
+
+                        <div class="col-md-6" >		
+                            <div class="form-group">
+                            <h5>Comments <span class="text-danger">*</span></h5>
+                            <div class="controls">
+                                <textarea name="comment" class="form-control">{{myqueue.comment}}</textarea>
+                            </div>	 
+                            </div>
+                        </div><!-- End Col Md-6 -->
+                        
+                        <div class="col-md-6" >
+                            <div class="form-group">
+                            <h5>Update Ticket <span class="text-danger">*</span></h5>
+                            <div class="controls">
+                                <select name="status"  required="" class="form-control">
+                                <option value="{{myqueue.status}}" selected=>{{myqueue.status}}</option>
+                                <option value="Done">Done</option>
+                                <option value="In Progress">In Progress</option>
+                                </select>
+                            </div>
+                            </div>
+                        </div> <!-- End Col Md-6 -->
+
+                        <div class="col-md-6" >
+                            <div class="form-group">
+                            <h5>Technician <span class="text-danger">*</span></h5>
+                            <div class="controls">
+                                <select name="technician"  required="" class="form-control">
+                                {% for user in usersList %}
+                                    <option value="{{user.profile.fname}}" selected=>{{user.profile.fname}}</option>
+                                {% endfor %}
+                                </select>
+                            </div>	 
+                            </div>
+                        </div> <!-- End Col Md-6 -->
+
+                        <div class="col-md-6">
+                            <input type="submit" class="btn btn-rounded btn-info mb-5" value="Update">
+                        </div>
+                                
+                        </div> <!-- End Row -->
+                    </div>
+                    </div>
+                    </form>
+                </div>
+            </section>
+
+            {% endblock %}

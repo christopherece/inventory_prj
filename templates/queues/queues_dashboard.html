@@ -32,6 +32,60 @@
                 <h3 class="card-title">ICT Request/Incident List</h3>
               </div>
               <!-- /.card-header -->
+              <section id="actions" class="py-4 mb-4 bg-light">
+                <div class="container">
+                  <div class="row">
+                    <div class="col-md-3">
+                        <div class="card text-center bg-primary text-white mb-3">
+                            <div class="card-body">
+                              <h3>Hardware</h3>
+                              <h4 class="display-6">
+                                <i class="fas fa-pencil-alt"></i> {{hardwareCount}}
+                              </h4>
+                              <a href="" class="btn btn-outline-light btn-sm">View</a>
+                            </div>
+                        </div>
+                    </div>
+            
+                    <div class="col-md-3">
+                        <div class="card text-center bg-success text-white mb-3">
+                            <div class="card-body">
+                              <h3>Software</h3>
+                              <h4 class="display-6">
+                                <i class="fas fa-folder"></i> {{softwareCount}}
+                              </h4>
+                              <a href="" class="btn btn-outline-light btn-sm">View</a>
+                            </div>
+                          </div>            
+                    </div>
+            
+                    <div class="col-md-3">
+                        <div class="card text-center bg-warning text-white mb-3">
+                            <div class="card-body">
+                              <h3>Phone</h3>
+                              <h4 class="display-6">
+                                <i class="fas fa-users"></i> {{phoneCount}}
+                              </h4>
+                              <a href="" class="btn btn-outline-light btn-sm">View</a>
+                            </div>
+                          </div>            
+                    </div>
+            
+                    <div class="col-md-3">
+                        <div class="card text-center bg-warning text-white mb-3">
+                            <div class="card-body">
+                              <h3>Account</h3>
+                              <h4 class="display-6">
+                                <i class="fas fa-users"></i> {{accountCount}}
+                              </h4>
+                              <a href="" class="btn btn-outline-light btn-sm">View</a>
+                            </div>
+                          </div>            
+                    </div>
+                  </div>
+                </div>
+              </section>
+
               <div class="card-body">
                 <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4"><div class="row"><div class="col-sm-12 col-md-6"></div><div class="col-sm-12 col-md-6"></div></div><div class="row"><div class="col-sm-12">
                   
@@ -99,9 +153,11 @@
                   <td>{{queueList.comment}}</td>
                   <td>{{queueList.technician}}</td>
                   <td>{{queueList.status}}</td>
-                  <td><a href="#" class="btn btn-secondary">
-                    <i class="fas fa-angle-double-right fa-xs"></i> Get Ticket
-                  </a></td>
+                  <td>
+                    <a href="{% url 'updateticket' queueList.id %}" class="btn btn-secondary">
+                      <i class="fas fa-angle-double-right fa-xs"></i> Get Ticket
+                    </a>
+                  </td>
 
                   </tr>
                   {% endfor %}

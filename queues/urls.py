@@ -3,4 +3,8 @@ from . import views
 
 urlpatterns = [
     path('queueList/', views.dashboard, name='dashboard'),
+    path('updateticket/<uuid:id>/', views.updateticket, name='updateticket'),
+    path('updatequeue/<uuid:id>/', views.updatequeue, name='updatequeue'),
+
+
 ]

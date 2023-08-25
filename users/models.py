@@ -16,7 +16,7 @@ class Profile(models.Model):
     is_active = models.BooleanField(default=True)
     profile_image = models.ImageField(null=True, blank=True, upload_to='profiles/', default="profiles/user-default.png")
     is_vip = models.BooleanField(default=False)
-    phone_no = models.IntegerField(max_length=20, blank=True, null=True)
+    phone_no = models.IntegerField(blank=True, null=True)
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
 
     def __str__(self):
