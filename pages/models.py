@@ -8,6 +8,12 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+    
+class Location(models.Model):
+    name = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.name
 
 class Items(models.Model):
 
@@ -27,7 +33,8 @@ class Items(models.Model):
     category = models.ForeignKey(Category, on_delete=models.DO_NOTHING)
     serial_no = models.CharField(max_length=200)
     display_name =  models.CharField(max_length=200)
-    stock_room = models.CharField(max_length=200, choices=LOCATION)
+    location = models.ForeignKey(Location, on_delete=models.DO_NOTHING )
+    stock_room = models.CharField(max_length=200, choices=LOCATION, blank=True, null=True)
     allocated_to = models.CharField(max_length=200, blank=True, null=True)
     cost = models.FloatField(blank=True, null=True)
     notes = models.TextField(blank=True, null=True)
@@ -36,9 +43,5 @@ class Items(models.Model):
     def __str__(self):
         return self.display_name
     
-class Location(models.Model):
-    name = models.CharField(max_length=200)
 
-    def __str__(self):
-        return self.name
 

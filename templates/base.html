@@ -123,9 +123,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
       var id = $(this).data('id');
       var serial_no = $(this).data('serial_no');
       var display_name = $(this).data('display_name');
-      var stock_room = $(this).data('stock_room');
+      var location = $(this).data('location');
       var allocated_to = $(this).data('allocated_to');
       var notes = $(this).data('notes'); // Get the notes value
+      var selectElement = $('#allocated_to');
+
+      
+      
 
 
       // Set the data in the modal fields
@@ -133,6 +137,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
       $('#serial_no').val(serial_no);
       $('#display_name').val(display_name);
       $('#allocated_to').val(allocated_to);
+      $('#location').val(location);
+
 
       $('#editItemForm').attr('action', '{% url "edit_item" 0 %}'.replace('0', id));
       $('#hardwareModalLabel').text('S/N: ' + serial_no);
@@ -145,17 +151,28 @@ scratch. This page gets rid of all links and provides the needed markup only.
               type: 'GET',
               url: '/get_all_users/',  // Use the correct URL for fetching all locations
               success: function(data) {
-                console.log(data)
+                var addedValues = []; // To keep track of added values
                   var userSelect = $('.allocated_to');
                   userSelect.empty();
                   
+                  userSelect.append($('<option>', {
+                      value: allocated_to,
+                      text: allocated_to,
+                      selected: true
+                  }));;
+                  addedValues.push(allocated_to); // Add to addedValues list
+
                   if (data.length > 0) {
                       for (var i = 0; i < data.length; i++) {
+                        if (data[i] !== allocated_to && addedValues.indexOf(data[i]) === -1) {
+
                               userSelect.append($('<option>', {
                               value: data[i],
                               text: data[i]
                           }));
                       }
+                    }
+
                   } else {
                       userSelect.append($('<option>', {
                           value: '',
@@ -174,14 +191,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
               type: 'GET',
               url: '/get_all_stockroom/',  // Use the correct URL for fetching all locations
               success: function(data) {
-                  var stockRoomSelect = $('.stock_room');
+                console.log(data)
+
+                  var stockRoomSelect = $('.location');
                   stockRoomSelect.empty();
                   
                   if (data.length > 0) {
                       for (var i = 0; i < data.length; i++) {
+                        var optionValue = data[i].id; // Replace 'id' with the actual property name
+                        var optionText = data[i].name; // Replace 'name' with the actual property name
+
                           stockRoomSelect.append($('<option>', {
-                              value: data[i],
-                              text: data[i]
+                              value: optionValue,
+                              text: optionText
                           }));
                       }
                   } else {

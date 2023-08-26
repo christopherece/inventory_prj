@@ -27,7 +27,7 @@ class ItemsAdmin(admin.ModelAdmin):
         'id',
         'serial_no',
         'display_name',
-        'stock_room',
+        'location',
         'allocated_to',
         'cost',
         'notes',
