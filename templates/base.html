@@ -129,9 +129,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
       var selectElement = $('#allocated_to');
 
       
-      
-
-
       // Set the data in the modal fields
       $('#item_id').val(id);
       $('#serial_no').val(serial_no);
@@ -191,20 +188,30 @@ scratch. This page gets rid of all links and provides the needed markup only.
               type: 'GET',
               url: '/get_all_stockroom/',  // Use the correct URL for fetching all locations
               success: function(data) {
-                console.log(data)
-
+                  var addedLocation = []; // To keep track of added values
                   var stockRoomSelect = $('.location');
                   stockRoomSelect.empty();
+
+                  stockRoomSelect.append($('<option>', {
+                      value: location,
+                      text: location,
+                      selected: true
+                  }));;
+                  addedLocation.push(location); // Add to addedValues list
                   
                   if (data.length > 0) {
                       for (var i = 0; i < data.length; i++) {
                         var optionValue = data[i].id; // Replace 'id' with the actual property name
                         var optionText = data[i].name; // Replace 'name' with the actual property name
+                        
+                          
+                      if (data[i] !== location && addedLocation.indexOf(data[i]) === -1) {
+                              stockRoomSelect.append($('<option>', {
+                                value: optionValue,
+                                text: optionText
+                            }));
 
-                          stockRoomSelect.append($('<option>', {
-                              value: optionValue,
-                              text: optionText
-                          }));
+                        }
                       }
                   } else {
                       stockRoomSelect.append($('<option>', {
