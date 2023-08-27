@@ -15,7 +15,7 @@ from .forms import QueueForm
 
 
 # Using the second database
-def dashboard(request):
+def queues(request):
     hardwareCount = Queue.objects.filter(type__contains='hardware').using('dockinn_db').count()
     softwareCount = Queue.objects.filter(type__contains='software').using('dockinn_db').count()
     phoneCount = Queue.objects.filter(type__contains='phone').using('dockinn_db').count()
